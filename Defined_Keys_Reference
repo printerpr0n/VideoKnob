@@ -52,3 +52,3100 @@
 #define LED_SCROLLLOCK  0x04
 #define LED_COMPOSE     0x08
 #define LED_KANA        0x10
+
+//Example of raw write for the spacebar in videoknob.ino
+ Keyboard.write((char)0x20);
+
+
+//Additional List of keyboard hexcodes
+
+Skip to content
+All gists
+Back to GitHub
+@printerpr0n
+@MightyPork
+MightyPork/usb_hid_keys.h
+Last active August 18, 2023 20:08 • Report abuse
+
+Code
+Revisions 5
+Stars 333
+Forks 42
+USB HID Keyboard scan codes
+usb_hid_keys.h
+/**
+ * USB HID Keyboard scan codes as per USB spec 1.11
+ * plus some additional codes
+ * 
+ * Created by MightyPork, 2016
+ * Public domain
+ * 
+ * Adapted from:
+ * https://source.android.com/devices/input/keyboard-devices.html
+ */
+
+#ifndef USB_HID_KEYS
+#define USB_HID_KEYS
+
+/**
+ * Modifier masks - used for the first byte in the HID report.
+ * NOTE: The second byte in the report is reserved, 0x00
+ */
+#define KEY_MOD_LCTRL  0x01
+#define KEY_MOD_LSHIFT 0x02
+#define KEY_MOD_LALT   0x04
+#define KEY_MOD_LMETA  0x08
+#define KEY_MOD_RCTRL  0x10
+#define KEY_MOD_RSHIFT 0x20
+#define KEY_MOD_RALT   0x40
+#define KEY_MOD_RMETA  0x80
+
+/**
+ * Scan codes - last N slots in the HID report (usually 6).
+ * 0x00 if no key pressed.
+ * 
+ * If more than N keys are pressed, the HID reports 
+ * KEY_ERR_OVF in all slots to indicate this condition.
+ */
+
+#define KEY_NONE 0x00 // No key pressed
+#define KEY_ERR_OVF 0x01 //  Keyboard Error Roll Over - used for all slots if too many keys are pressed ("Phantom key")
+// 0x02 //  Keyboard POST Fail
+// 0x03 //  Keyboard Error Undefined
+#define KEY_A 0x04 // Keyboard a and A
+#define KEY_B 0x05 // Keyboard b and B
+#define KEY_C 0x06 // Keyboard c and C
+#define KEY_D 0x07 // Keyboard d and D
+#define KEY_E 0x08 // Keyboard e and E
+#define KEY_F 0x09 // Keyboard f and F
+#define KEY_G 0x0a // Keyboard g and G
+#define KEY_H 0x0b // Keyboard h and H
+#define KEY_I 0x0c // Keyboard i and I
+#define KEY_J 0x0d // Keyboard j and J
+#define KEY_K 0x0e // Keyboard k and K
+#define KEY_L 0x0f // Keyboard l and L
+#define KEY_M 0x10 // Keyboard m and M
+#define KEY_N 0x11 // Keyboard n and N
+#define KEY_O 0x12 // Keyboard o and O
+#define KEY_P 0x13 // Keyboard p and P
+#define KEY_Q 0x14 // Keyboard q and Q
+#define KEY_R 0x15 // Keyboard r and R
+#define KEY_S 0x16 // Keyboard s and S
+#define KEY_T 0x17 // Keyboard t and T
+#define KEY_U 0x18 // Keyboard u and U
+#define KEY_V 0x19 // Keyboard v and V
+#define KEY_W 0x1a // Keyboard w and W
+#define KEY_X 0x1b // Keyboard x and X
+#define KEY_Y 0x1c // Keyboard y and Y
+#define KEY_Z 0x1d // Keyboard z and Z
+
+#define KEY_1 0x1e // Keyboard 1 and !
+#define KEY_2 0x1f // Keyboard 2 and @
+#define KEY_3 0x20 // Keyboard 3 and #
+#define KEY_4 0x21 // Keyboard 4 and $
+#define KEY_5 0x22 // Keyboard 5 and %
+#define KEY_6 0x23 // Keyboard 6 and ^
+#define KEY_7 0x24 // Keyboard 7 and &
+#define KEY_8 0x25 // Keyboard 8 and *
+#define KEY_9 0x26 // Keyboard 9 and (
+#define KEY_0 0x27 // Keyboard 0 and )
+
+#define KEY_ENTER 0x28 // Keyboard Return (ENTER)
+#define KEY_ESC 0x29 // Keyboard ESCAPE
+#define KEY_BACKSPACE 0x2a // Keyboard DELETE (Backspace)
+#define KEY_TAB 0x2b // Keyboard Tab
+#define KEY_SPACE 0x2c // Keyboard Spacebar
+#define KEY_MINUS 0x2d // Keyboard - and _
+#define KEY_EQUAL 0x2e // Keyboard = and +
+#define KEY_LEFTBRACE 0x2f // Keyboard [ and {
+#define KEY_RIGHTBRACE 0x30 // Keyboard ] and }
+#define KEY_BACKSLASH 0x31 // Keyboard \ and |
+#define KEY_HASHTILDE 0x32 // Keyboard Non-US # and ~
+#define KEY_SEMICOLON 0x33 // Keyboard ; and :
+#define KEY_APOSTROPHE 0x34 // Keyboard ' and "
+#define KEY_GRAVE 0x35 // Keyboard ` and ~
+#define KEY_COMMA 0x36 // Keyboard , and <
+#define KEY_DOT 0x37 // Keyboard . and >
+#define KEY_SLASH 0x38 // Keyboard / and ?
+#define KEY_CAPSLOCK 0x39 // Keyboard Caps Lock
+
+#define KEY_F1 0x3a // Keyboard F1
+#define KEY_F2 0x3b // Keyboard F2
+#define KEY_F3 0x3c // Keyboard F3
+#define KEY_F4 0x3d // Keyboard F4
+#define KEY_F5 0x3e // Keyboard F5
+#define KEY_F6 0x3f // Keyboard F6
+#define KEY_F7 0x40 // Keyboard F7
+#define KEY_F8 0x41 // Keyboard F8
+#define KEY_F9 0x42 // Keyboard F9
+#define KEY_F10 0x43 // Keyboard F10
+#define KEY_F11 0x44 // Keyboard F11
+#define KEY_F12 0x45 // Keyboard F12
+
+#define KEY_SYSRQ 0x46 // Keyboard Print Screen
+#define KEY_SCROLLLOCK 0x47 // Keyboard Scroll Lock
+#define KEY_PAUSE 0x48 // Keyboard Pause
+#define KEY_INSERT 0x49 // Keyboard Insert
+#define KEY_HOME 0x4a // Keyboard Home
+#define KEY_PAGEUP 0x4b // Keyboard Page Up
+#define KEY_DELETE 0x4c // Keyboard Delete Forward
+#define KEY_END 0x4d // Keyboard End
+#define KEY_PAGEDOWN 0x4e // Keyboard Page Down
+#define KEY_RIGHT 0x4f // Keyboard Right Arrow
+#define KEY_LEFT 0x50 // Keyboard Left Arrow
+#define KEY_DOWN 0x51 // Keyboard Down Arrow
+#define KEY_UP 0x52 // Keyboard Up Arrow
+
+#define KEY_NUMLOCK 0x53 // Keyboard Num Lock and Clear
+#define KEY_KPSLASH 0x54 // Keypad /
+#define KEY_KPASTERISK 0x55 // Keypad *
+#define KEY_KPMINUS 0x56 // Keypad -
+#define KEY_KPPLUS 0x57 // Keypad +
+#define KEY_KPENTER 0x58 // Keypad ENTER
+#define KEY_KP1 0x59 // Keypad 1 and End
+#define KEY_KP2 0x5a // Keypad 2 and Down Arrow
+#define KEY_KP3 0x5b // Keypad 3 and PageDn
+#define KEY_KP4 0x5c // Keypad 4 and Left Arrow
+#define KEY_KP5 0x5d // Keypad 5
+#define KEY_KP6 0x5e // Keypad 6 and Right Arrow
+#define KEY_KP7 0x5f // Keypad 7 and Home
+#define KEY_KP8 0x60 // Keypad 8 and Up Arrow
+#define KEY_KP9 0x61 // Keypad 9 and Page Up
+#define KEY_KP0 0x62 // Keypad 0 and Insert
+#define KEY_KPDOT 0x63 // Keypad . and Delete
+
+#define KEY_102ND 0x64 // Keyboard Non-US \ and |
+#define KEY_COMPOSE 0x65 // Keyboard Application
+#define KEY_POWER 0x66 // Keyboard Power
+#define KEY_KPEQUAL 0x67 // Keypad =
+
+#define KEY_F13 0x68 // Keyboard F13
+#define KEY_F14 0x69 // Keyboard F14
+#define KEY_F15 0x6a // Keyboard F15
+#define KEY_F16 0x6b // Keyboard F16
+#define KEY_F17 0x6c // Keyboard F17
+#define KEY_F18 0x6d // Keyboard F18
+#define KEY_F19 0x6e // Keyboard F19
+#define KEY_F20 0x6f // Keyboard F20
+#define KEY_F21 0x70 // Keyboard F21
+#define KEY_F22 0x71 // Keyboard F22
+#define KEY_F23 0x72 // Keyboard F23
+#define KEY_F24 0x73 // Keyboard F24
+
+#define KEY_OPEN 0x74 // Keyboard Execute
+#define KEY_HELP 0x75 // Keyboard Help
+#define KEY_PROPS 0x76 // Keyboard Menu
+#define KEY_FRONT 0x77 // Keyboard Select
+#define KEY_STOP 0x78 // Keyboard Stop
+#define KEY_AGAIN 0x79 // Keyboard Again
+#define KEY_UNDO 0x7a // Keyboard Undo
+#define KEY_CUT 0x7b // Keyboard Cut
+#define KEY_COPY 0x7c // Keyboard Copy
+#define KEY_PASTE 0x7d // Keyboard Paste
+#define KEY_FIND 0x7e // Keyboard Find
+#define KEY_MUTE 0x7f // Keyboard Mute
+#define KEY_VOLUMEUP 0x80 // Keyboard Volume Up
+#define KEY_VOLUMEDOWN 0x81 // Keyboard Volume Down
+// 0x82  Keyboard Locking Caps Lock
+// 0x83  Keyboard Locking Num Lock
+// 0x84  Keyboard Locking Scroll Lock
+#define KEY_KPCOMMA 0x85 // Keypad Comma
+// 0x86  Keypad Equal Sign
+#define KEY_RO 0x87 // Keyboard International1
+#define KEY_KATAKANAHIRAGANA 0x88 // Keyboard International2
+#define KEY_YEN 0x89 // Keyboard International3
+#define KEY_HENKAN 0x8a // Keyboard International4
+#define KEY_MUHENKAN 0x8b // Keyboard International5
+#define KEY_KPJPCOMMA 0x8c // Keyboard International6
+// 0x8d  Keyboard International7
+// 0x8e  Keyboard International8
+// 0x8f  Keyboard International9
+#define KEY_HANGEUL 0x90 // Keyboard LANG1
+#define KEY_HANJA 0x91 // Keyboard LANG2
+#define KEY_KATAKANA 0x92 // Keyboard LANG3
+#define KEY_HIRAGANA 0x93 // Keyboard LANG4
+#define KEY_ZENKAKUHANKAKU 0x94 // Keyboard LANG5
+// 0x95  Keyboard LANG6
+// 0x96  Keyboard LANG7
+// 0x97  Keyboard LANG8
+// 0x98  Keyboard LANG9
+// 0x99  Keyboard Alternate Erase
+// 0x9a  Keyboard SysReq/Attention
+// 0x9b  Keyboard Cancel
+// 0x9c  Keyboard Clear
+// 0x9d  Keyboard Prior
+// 0x9e  Keyboard Return
+// 0x9f  Keyboard Separator
+// 0xa0  Keyboard Out
+// 0xa1  Keyboard Oper
+// 0xa2  Keyboard Clear/Again
+// 0xa3  Keyboard CrSel/Props
+// 0xa4  Keyboard ExSel
+
+// 0xb0  Keypad 00
+// 0xb1  Keypad 000
+// 0xb2  Thousands Separator
+// 0xb3  Decimal Separator
+// 0xb4  Currency Unit
+// 0xb5  Currency Sub-unit
+#define KEY_KPLEFTPAREN 0xb6 // Keypad (
+#define KEY_KPRIGHTPAREN 0xb7 // Keypad )
+// 0xb8  Keypad {
+// 0xb9  Keypad }
+// 0xba  Keypad Tab
+// 0xbb  Keypad Backspace
+// 0xbc  Keypad A
+// 0xbd  Keypad B
+// 0xbe  Keypad C
+// 0xbf  Keypad D
+// 0xc0  Keypad E
+// 0xc1  Keypad F
+// 0xc2  Keypad XOR
+// 0xc3  Keypad ^
+// 0xc4  Keypad %
+// 0xc5  Keypad <
+// 0xc6  Keypad >
+// 0xc7  Keypad &
+// 0xc8  Keypad &&
+// 0xc9  Keypad |
+// 0xca  Keypad ||
+// 0xcb  Keypad :
+// 0xcc  Keypad #
+// 0xcd  Keypad Space
+// 0xce  Keypad @
+// 0xcf  Keypad !
+// 0xd0  Keypad Memory Store
+// 0xd1  Keypad Memory Recall
+// 0xd2  Keypad Memory Clear
+// 0xd3  Keypad Memory Add
+// 0xd4  Keypad Memory Subtract
+// 0xd5  Keypad Memory Multiply
+// 0xd6  Keypad Memory Divide
+// 0xd7  Keypad +/-
+// 0xd8  Keypad Clear
+// 0xd9  Keypad Clear Entry
+// 0xda  Keypad Binary
+// 0xdb  Keypad Octal
+// 0xdc  Keypad Decimal
+// 0xdd  Keypad Hexadecimal
+
+#define KEY_LEFTCTRL 0xe0 // Keyboard Left Control
+#define KEY_LEFTSHIFT 0xe1 // Keyboard Left Shift
+#define KEY_LEFTALT 0xe2 // Keyboard Left Alt
+#define KEY_LEFTMETA 0xe3 // Keyboard Left GUI
+#define KEY_RIGHTCTRL 0xe4 // Keyboard Right Control
+#define KEY_RIGHTSHIFT 0xe5 // Keyboard Right Shift
+#define KEY_RIGHTALT 0xe6 // Keyboard Right Alt
+#define KEY_RIGHTMETA 0xe7 // Keyboard Right GUI
+
+#define KEY_MEDIA_PLAYPAUSE 0xe8
+#define KEY_MEDIA_STOPCD 0xe9
+#define KEY_MEDIA_PREVIOUSSONG 0xea
+#define KEY_MEDIA_NEXTSONG 0xeb
+#define KEY_MEDIA_EJECTCD 0xec
+#define KEY_MEDIA_VOLUMEUP 0xed
+#define KEY_MEDIA_VOLUMEDOWN 0xee
+#define KEY_MEDIA_MUTE 0xef
+#define KEY_MEDIA_WWW 0xf0
+#define KEY_MEDIA_BACK 0xf1
+#define KEY_MEDIA_FORWARD 0xf2
+#define KEY_MEDIA_STOP 0xf3
+#define KEY_MEDIA_FIND 0xf4
+#define KEY_MEDIA_SCROLLUP 0xf5
+#define KEY_MEDIA_SCROLLDOWN 0xf6
+#define KEY_MEDIA_EDIT 0xf7
+#define KEY_MEDIA_SLEEP 0xf8
+#define KEY_MEDIA_COFFEE 0xf9
+#define KEY_MEDIA_REFRESH 0xfa
+#define KEY_MEDIA_CALC 0xfb
+
+#endif // USB_HID_KEYS
+@bsean95531
+bsean95531 commented Feb 7, 2021
+
+My .org incest was stolen and ???
+@VLTNOgithub
+VLTNOgithub commented Jul 6, 2021
+
+I converted them all to decimals.
+It's useful for Arduino, etc.
+Link
+@thiagosanches
+thiagosanches commented Jul 31, 2021
+
+This is pretty useful!
+@syminical
+syminical commented Aug 31, 2021
+
+Thank you! @MightyPork
+I created a python script using the key data in this gist.
+It takes some hex data from a packet capture and decodes it to output the input text.
+@thaolt
+thaolt commented Nov 13, 2021 •
+
+Thank you for the sharing.
+
+I want to share this array in case of anyone needed
+
+#include "usb_hid_keys.h"
+
+const char ascii_to_hid_key_map[95][2] = {
+    {0, KEY_SPACE}, {KEY_MOD_LSHIFT, KEY_1}, {KEY_MOD_LSHIFT, KEY_APOSTROPHE},
+    {KEY_MOD_LSHIFT, KEY_3}, {KEY_MOD_LSHIFT, KEY_4}, {KEY_MOD_LSHIFT, KEY_5},
+    {KEY_MOD_LSHIFT, KEY_7}, {0, KEY_APOSTROPHE}, {KEY_MOD_LSHIFT, KEY_9},
+    {KEY_MOD_LSHIFT, KEY_0}, {KEY_MOD_LSHIFT, KEY_8}, {KEY_MOD_LSHIFT, KEY_EQUAL},
+    {0, KEY_COMMA}, {0, KEY_MINUS}, {0, KEY_DOT}, {0, KEY_SLASH}, {0, KEY_0},
+    {0, KEY_1}, {0, KEY_2}, {0, KEY_3}, {0, KEY_4}, {0, KEY_5}, {0, KEY_6},
+    {0, KEY_7}, {0, KEY_8}, {0, KEY_9}, {KEY_MOD_LSHIFT, KEY_SEMICOLON},
+    {0, KEY_SEMICOLON}, {KEY_MOD_LSHIFT, KEY_COMMA}, {0, KEY_EQUAL},
+    {KEY_MOD_LSHIFT, KEY_DOT}, {KEY_MOD_LSHIFT, KEY_SLASH}, {KEY_MOD_LSHIFT, KEY_2},
+    {KEY_MOD_LSHIFT, KEY_A}, {KEY_MOD_LSHIFT, KEY_B}, {KEY_MOD_LSHIFT, KEY_C},
+    {KEY_MOD_LSHIFT, KEY_D}, {KEY_MOD_LSHIFT, KEY_E}, {KEY_MOD_LSHIFT, KEY_F},
+    {KEY_MOD_LSHIFT, KEY_G}, {KEY_MOD_LSHIFT, KEY_H}, {KEY_MOD_LSHIFT, KEY_I},
+    {KEY_MOD_LSHIFT, KEY_J}, {KEY_MOD_LSHIFT, KEY_K}, {KEY_MOD_LSHIFT, KEY_L},
+    {KEY_MOD_LSHIFT, KEY_M}, {KEY_MOD_LSHIFT, KEY_N}, {KEY_MOD_LSHIFT, KEY_O},
+    {KEY_MOD_LSHIFT, KEY_P}, {KEY_MOD_LSHIFT, KEY_Q}, {KEY_MOD_LSHIFT, KEY_R},
+    {KEY_MOD_LSHIFT, KEY_S}, {KEY_MOD_LSHIFT, KEY_T}, {KEY_MOD_LSHIFT, KEY_U},
+    {KEY_MOD_LSHIFT, KEY_V}, {KEY_MOD_LSHIFT, KEY_W}, {KEY_MOD_LSHIFT, KEY_X},
+    {KEY_MOD_LSHIFT, KEY_Y}, {KEY_MOD_LSHIFT, KEY_Z}, {0, KEY_LEFTBRACE},
+    {0, KEY_BACKSLASH}, {0, KEY_RIGHTBRACE}, {KEY_MOD_LSHIFT, KEY_6},
+    {KEY_MOD_LSHIFT, KEY_MINUS}, {0, KEY_GRAVE}, {0, KEY_A}, {0, KEY_B},
+    {0, KEY_C}, {0, KEY_D}, {0, KEY_E}, {0, KEY_F}, {0, KEY_G}, {0, KEY_H},
+    {0, KEY_I}, {0, KEY_J}, {0, KEY_K}, {0, KEY_L}, {0, KEY_M}, {0, KEY_N},
+    {0, KEY_O}, {0, KEY_P}, {0, KEY_Q}, {0, KEY_R}, {0, KEY_S}, {0, KEY_T},
+    {0, KEY_U}, {0, KEY_V}, {0, KEY_W}, {0, KEY_X}, {0, KEY_Y}, {0, KEY_Z},
+    {KEY_MOD_LSHIFT, KEY_LEFTBRACE}, {KEY_MOD_LSHIFT, KEY_BACKSLASH},
+    {KEY_MOD_LSHIFT, KEY_RIGHTBRACE}, {KEY_MOD_LSHIFT, KEY_GRAVE},
+};
+
+Example usage
+
+void hid_sendch(uint8_t c)
+{
+    uint8_t buffer[8] = {0};
+
+    if (c > 127) return;
+    if (c < 32) return;
+
+    c -= 32; // offset ignore the first 32 symbols in ascii table
+
+    buffer[0] = ascii_to_hid_key_map[c][0];
+    buffer[2] = ascii_to_hid_key_map[c][1];
+
+    FILE* f = fopen("/dev/hidg0", "wb");
+    fwrite(buffer, sizeof (char), 8, f);
+    fclose(f);
+
+    usleep(10000);
+
+    buffer[0] = 0;
+    buffer[2]= 0;
+    f = fopen("/dev/hidg0", "wb");
+    fwrite(buffer, sizeof (char), 8, f);
+    fclose(f);
+
+    usleep(50000);
+}
+
+void hid_sendstr(char* str)
+{
+    uint8_t l = strlen(str);
+    for (uint8_t i = 0; i < l; i++) {
+        hid_sendch(str[i]);
+    }
+}
+
+hid_sendstr("Hello World!");
+
+@csBlueChip
+csBlueChip commented Nov 14, 2021
+
+That's a handy array! ...The implicit casts between char and uint8_t are probably going to be safe in most cases (so long as you don't enable compiler warnings) ...but be careful if you call sendkey(31) ...I'm curious: Why you close the device and immediately reopen it for the second keystroke?
+@thaolt
+thaolt commented Nov 14, 2021
+
+Thank @csBlueChip for your suggestion, I've updated it into a safer function. My application only handles printable ASCII string, thus <32 and >127 indexes is not supported. In my actual application source, there is a delay between writes. The function simulates key-press and key-release. The reason for close and reopen the before second writing is because of tried and true. I think the written buffer isn't sent until the device is closed, I'm not sure. For more information: https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/
+@Sherknob
+Sherknob commented Feb 4, 2022
+
+Hey, I encountered a weird behavior. All the scan codes work, except for the 'g' Key. On linux the 'g' Key is no problem and gets send and arrives correctly. On Windows, nothing arrived. Anyone any idea? Thanks :)
+@Sherknob
+Sherknob commented Feb 5, 2022 •
+
+Okay, on closer look after the 'g' the transmission got cut. i.e \x00\x00\x0a\x00\x00\x00\x00\x00 would result in \x00\x00\x0a. Fix was to position the 'g' in the last spot of the sequence so \x00\x00\x00\x00\x00\x00\x00\x0a. In case anyone has the same problem :)
+@suburban-daredevil
+suburban-daredevil commented Mar 17, 2022
+
+Hi @wiwa1978 @MightyPork ,
+
+I am interested in using the key combination of alt + f4. But I am not able to find the required solution. Any kind of help is appreciated
+
+Thanks
+@csBlueChip
+csBlueChip commented Mar 17, 2022
+
+    I am interested in using the key combination of alt + f4. But I am not able to find the required solution. Any kind of help is appreciated
+
+You need to do the check in two parts ...first check the modifier keys to see that KEY_MOD_LALT is (the only modifier) being pressed ...then check to see if KEY_F4 is (the only key) being pressed
+
+This video may help you understand why: https://youtu.be/wdgULBpRoXk?t=1545
+@Sherknob
+Sherknob commented Mar 18, 2022
+
+So maybe I can help with this. A string send over by a keyboard or for instance a rubber ducky consists of 8 bytes. The first byte is the modifier key. This value can be everything you see in the first post of this thread @line 19 - 26. You can also use combinations of modifiers by simply adding them together (LALT + LSHIFT = 0x06). So the first value of your string would be 0x04, because this is the value of left Alt. The second byte is reserved, so we'll leave it 0. Now the keys will follow. In your case the next key would be F4 (0x3d). Throwing everything into a sequence of 8 bytes and you'll get \04\0\3d\0\0\0\0\0. Don't forget to let go of all the keys by sending a string full of 0's. :))
+I have made a project where I turn a linux phone into a rubber ducky using exactly this. You may have a look :)
+https://github.com/Sherknob/PineDucky
+@suburban-daredevil
+suburban-daredevil commented Mar 18, 2022 •
+
+Hey @Sherknob
+
+Thanks for your response
+
+I am currently using this library from Github. I am also using the key_code function as given here. As it is given that, the arguments to the key_code function is only integers. But the solution that you have given contains strings. How can I use that?
+
+Thanks and regards
+@Sherknob
+Sherknob commented Mar 19, 2022
+
+Hey @suburban-daredevil
+Since the code you provided in your latest comment is pretty much uncommented and I don't have much time at hand, I think it would be great to have a look at your existing code. Is this possible?
+
+Have a nice day :)
+@Sherknob
+Sherknob commented Mar 20, 2022
+
+Hello @suburban-daredevil :)
+
+Good news I think. I found the function that does, what I've been explaining in my initial comment.
+
+int USBKeyboard::_putc(int c)
+{
+    return key_code(c, keymap[c].modifier);
+}
+
+Above is the function that calls key_code and returns a boolean if it was successful or not. You are using the key_code function directly, and that is okay I guess.
+
+bool USBKeyboard::key_code(uint8_t key, uint8_t modifier)
+{
+    _mutex.lock();
+
+    // Send a simulated keyboard keypress. Returns true if successful.
+    HID_REPORT report;
+
+    report.data[0] = REPORT_ID_KEYBOARD;
+    report.data[1] = modifier;
+    report.data[2] = 0;
+    report.data[3] = keymap[key].usage;
+    report.data[4] = 0;
+    report.data[5] = 0;
+    report.data[6] = 0;
+    report.data[7] = 0;
+    report.data[8] = 0;
+
+    report.length = 9;
+
+    if (!send(&report)) {
+        _mutex.unlock();
+        return false;
+    }
+
+    report.data[1] = 0;
+    report.data[3] = 0;
+
+    if (!send(&report)) {
+        _mutex.unlock();
+        return false;
+    }
+
+    _mutex.unlock();
+    return true;
+
+}
+
+The function shown above it doing the thing I was explaining earlier. It is expecting a key code (in your case MY_SHUTDOWN) and a modifier value (in your case KEY_LALT). Then it is inserting these values into an array of ints. This array is the "string" I was talking of. One more thing, as you can see, keymap[key].usage is written to report.data[3]. Since you are not using a keymap you could just change keymap[key].usage to key. And this function seems to send a "let go of all keys" afterwards, so you don't need your key.key_code(KEY_NONE);.
+For now, to make it simplest, you could define your key separate from your modifier. So this would be
+
+#define KEY_LALT 0x04
+#define MY_SHUTDOWN 0x3d
+
+and then call the function with key_code(MY_SHUTDOWN, KEY_LALT);.
+Note: I did not test any of this :)
+
+Hope this helps
+@suburban-daredevil
+suburban-daredevil commented Mar 20, 2022 •
+
+Hey @Sherknob
+
+Thank you so much for your guidance
+
+I actually found the fix through your guidance. We must actually use the index of the key that is required, f4 in our case, from the keymap table in the USBKeyboard.cpp file. The index of f4 was 131. Giving that along with the predefined KEY_ALT as modifier works as expected.
+
+ #define MY_KEY_F4 131
+
+key.key_code(MY_KEY_F4, KEY_ALT);
+
+Similarly any other key combinations can be used. Just find the index of the required key in the USBKeyboard.cpp file and replace the first parameter of key_code with that value and second parameter with that of the required modifier.
+
+The predefined modifiers are KEY_CTRL, KEY_SHIFT, KEY_ALT. Please take a look here for further clarity!
+
+Thanks to @Sherknob
+
+Thanks and regards
+@Sherknob
+Sherknob commented Mar 20, 2022
+
+@suburban-daredevil
+Your welcome. Happy to hear that you got it working :)
+Have a nice day :))
+@NessDan
+NessDan commented Mar 31, 2022
+
+Is there no key code for the Context Menu key (or would that be the "Props" key?)
+@MuhammedZakir
+MuhammedZakir commented Apr 17, 2022
+
+    Is there no key code for the Context Menu key (or would that be the "Props" key?)
+
+It is #define KEY_COMPOSE 0x65 // Keyboard Application.
+@tomek-szczesny
+tomek-szczesny commented May 3, 2022 •
+
+    @PaddleStroke the page this came from doesn't list anything. If you have a keyboard with them, you can try catching them with xev here's something about the Fn key, maybe it'll work. https://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html
+
+Hi, this link leads to extra information about PS/2 keyboard if I'm not mistaken. I found this page as I too am seeking the keycode for display brightness and others under Fn combo.
+So if anyone knows the answer, please share. :)
+
+EDIT: Okay, found it. USB HID Usage Tables defines "Display Brightness Increment/Decrement" codes as 0x6F and 0x70 respectively, but on Consumer Page (0x0C) rather than Keyboard Page (0x07).
+@krishtoautomate
+krishtoautomate commented Oct 16, 2022
+
+QQ: is this hid actions limited to android or will apply to ios as well?
+@arashout
+arashout commented Oct 17, 2022
+
+I made a JSON dict version for anyone working on CTFs using Python/Javascript:
+
+{
+    "0x00":"KEY_NONE",
+    "0x01":"KEY_ERR_OVF", 
+    "0x04":"KEY_A", 
+    "0x05":"KEY_B", 
+    "0x06":"KEY_C", 
+    "0x07":"KEY_D", 
+    "0x08":"KEY_E", 
+    "0x09":"KEY_F", 
+    "0x0a":"KEY_G", 
+    "0x0b":"KEY_H", 
+    "0x0c":"KEY_I", 
+    "0x0d":"KEY_J", 
+    "0x0e":"KEY_K", 
+    "0x0f":"KEY_L", 
+    "0x10":"KEY_M", 
+    "0x11":"KEY_N", 
+    "0x12":"KEY_O", 
+    "0x13":"KEY_P", 
+    "0x14":"KEY_Q", 
+    "0x15":"KEY_R", 
+    "0x16":"KEY_S", 
+    "0x17":"KEY_T", 
+    "0x18":"KEY_U", 
+    "0x19":"KEY_V", 
+    "0x1a":"KEY_W", 
+    "0x1b":"KEY_X", 
+    "0x1c":"KEY_Y", 
+    "0x1d":"KEY_Z", "0x1e":"KEY_1", 
+    "0x1f":"KEY_2", 
+    "0x20":"KEY_3", 
+    "0x21":"KEY_4", 
+    "0x22":"KEY_5", 
+    "0x23":"KEY_6", 
+    "0x24":"KEY_7", 
+    "0x25":"KEY_8", 
+    "0x26":"KEY_9", 
+    "0x27":"KEY_0", "0x28":"KEY_ENTER", 
+    "0x29":"KEY_ESC", 
+    "0x2a":"KEY_BACKSPACE", 
+    "0x2b":"KEY_TAB", 
+    "0x2c":"KEY_SPACE", 
+    "0x2d":"KEY_MINUS", 
+    "0x2e":"KEY_EQUAL", 
+    "0x2f":"KEY_LEFTBRACE", 
+    "0x30":"KEY_RIGHTBRACE", 
+    "0x31":"KEY_BACKSLASH", 
+    "0x32":"KEY_HASHTILDE", 
+    "0x33":"KEY_SEMICOLON", 
+    "0x34":"KEY_APOSTROPHE", 
+    "0x35":"KEY_GRAVE", 
+    "0x36":"KEY_COMMA", 
+    "0x37":"KEY_DOT", 
+    "0x38":"KEY_SLASH", 
+    "0x39":"KEY_CAPSLOCK", "0x3a":"KEY_F1", 
+    "0x3b":"KEY_F2", 
+    "0x3c":"KEY_F3", 
+    "0x3d":"KEY_F4", 
+    "0x3e":"KEY_F5", 
+    "0x3f":"KEY_F6", 
+    "0x40":"KEY_F7", 
+    "0x41":"KEY_F8", 
+    "0x42":"KEY_F9", 
+    "0x43":"KEY_F10", 
+    "0x44":"KEY_F11", 
+    "0x45":"KEY_F12", "0x46":"KEY_SYSRQ", 
+    "0x47":"KEY_SCROLLLOCK", 
+    "0x48":"KEY_PAUSE", 
+    "0x49":"KEY_INSERT", 
+    "0x4a":"KEY_HOME", 
+    "0x4b":"KEY_PAGEUP", 
+    "0x4c":"KEY_DELETE", 
+    "0x4d":"KEY_END", 
+    "0x4e":"KEY_PAGEDOWN", 
+    "0x4f":"KEY_RIGHT", 
+    "0x50":"KEY_LEFT", 
+    "0x51":"KEY_DOWN", 
+    "0x52":"KEY_UP", "0x53":"KEY_NUMLOCK", 
+    "0x54":"KEY_KPSLASH", 
+    "0x55":"KEY_KPASTERISK", 
+    "0x56":"KEY_KPMINUS", 
+    "0x57":"KEY_KPPLUS", 
+    "0x58":"KEY_KPENTER", 
+    "0x59":"KEY_KP1", 
+    "0x5a":"KEY_KP2", 
+    "0x5b":"KEY_KP3", 
+    "0x5c":"KEY_KP4", 
+    "0x5d":"KEY_KP5", 
+    "0x5e":"KEY_KP6", 
+    "0x5f":"KEY_KP7", 
+    "0x60":"KEY_KP8", 
+    "0x61":"KEY_KP9", 
+    "0x62":"KEY_KP0", 
+    "0x63":"KEY_KPDOT", "0x64":"KEY_102ND", 
+    "0x65":"KEY_COMPOSE", 
+    "0x66":"KEY_POWER", 
+    "0x67":"KEY_KPEQUAL", "0x68":"KEY_F13", 
+    "0x69":"KEY_F14", 
+    "0x6a":"KEY_F15", 
+    "0x6b":"KEY_F16", 
+    "0x6c":"KEY_F17", 
+    "0x6d":"KEY_F18", 
+    "0x6e":"KEY_F19", 
+    "0x6f":"KEY_F20", 
+    "0x70":"KEY_F21", 
+    "0x71":"KEY_F22", 
+    "0x72":"KEY_F23", 
+    "0x73":"KEY_F24", "0x74":"KEY_OPEN", 
+    "0x75":"KEY_HELP", 
+    "0x76":"KEY_PROPS", 
+    "0x77":"KEY_FRONT", 
+    "0x78":"KEY_STOP", 
+    "0x79":"KEY_AGAIN", 
+    "0x7a":"KEY_UNDO", 
+    "0x7b":"KEY_CUT", 
+    "0x7c":"KEY_COPY", 
+    "0x7d":"KEY_PASTE", 
+    "0x7e":"KEY_FIND", 
+    "0x7f":"KEY_MUTE", 
+    "0x80":"KEY_VOLUMEUP", 
+    "0x81":"KEY_VOLUMEDOWN", "0x85":"KEY_KPCOMMA", "0x87":"KEY_RO", 
+    "0x88":"KEY_KATAKANAHIRAGANA", 
+    "0x89":"KEY_YEN", 
+    "0x8a":"KEY_HENKAN", 
+    "0x8b":"KEY_MUHENKAN", 
+    "0x8c":"KEY_KPJPCOMMA", "0x90":"KEY_HANGEUL", 
+    "0x91":"KEY_HANJA", 
+    "0x92":"KEY_KATAKANA", 
+    "0x93":"KEY_HIRAGANA", 
+    "0x94":"KEY_ZENKAKUHANKAKU", "0xb6":"KEY_KPLEFTPAREN", 
+    "0xb7":"KEY_KPRIGHTPAREN", "0xe0":"KEY_LEFTCTRL", 
+    "0xe1":"KEY_LEFTSHIFT", 
+    "0xe2":"KEY_LEFTALT", 
+    "0xe3":"KEY_LEFTMETA", 
+    "0xe4":"KEY_RIGHTCTRL", 
+    "0xe5":"KEY_RIGHTSHIFT", 
+    "0xe6":"KEY_RIGHTALT", 
+    "0xe7":"KEY_RIGHTMETA", "0xe8":"KEY_MEDIA_PLAYPAUSE",
+    "0xe9":"KEY_MEDIA_STOPCD",
+    "0xea":"KEY_MEDIA_PREVIOUSSONG",
+    "0xeb":"KEY_MEDIA_NEXTSONG",
+    "0xec":"KEY_MEDIA_EJECTCD",
+    "0xed":"KEY_MEDIA_VOLUMEUP",
+    "0xee":"KEY_MEDIA_VOLUMEDOWN",
+    "0xef":"KEY_MEDIA_MUTE",
+    "0xf0":"KEY_MEDIA_WWW",
+    "0xf1":"KEY_MEDIA_BACK",
+    "0xf2":"KEY_MEDIA_FORWARD",
+    "0xf3":"KEY_MEDIA_STOP",
+    "0xf4":"KEY_MEDIA_FIND",
+    "0xf5":"KEY_MEDIA_SCROLLUP",
+    "0xf6":"KEY_MEDIA_SCROLLDOWN",
+    "0xf7":"KEY_MEDIA_EDIT",
+    "0xf8":"KEY_MEDIA_SLEEP",
+    "0xf9":"KEY_MEDIA_COFFEE",
+    "0xfa":"KEY_MEDIA_REFRESH",
+    "0xfb":"KEY_MEDIA_CALC",
+}
+
+@Sherknob
+Sherknob commented Oct 19, 2022
+
+    QQ: is this hid actions limited to android or will apply to ios as well?
+
+I've had success with the same keymap on MacOS. Can't say anything on IOS.
+@krishtoautomate
+krishtoautomate commented Nov 12, 2022
+
+@Sherknob possible to share the code that works on mac?
+@Sherknob
+Sherknob commented Nov 13, 2022
+
+    @Sherknob possible to share the code that works on mac?
+
+Sure, just have a quick look at my repo PineDucky.
+@DJm00n
+DJm00n commented Jun 16, 2023 •
+
+@arashout
+
+    The HID Usage Tables 1.4 document also includes all Usage definitions as a JSON file as an attachment to the PDF. The PDF serves as the 'single' source of truth.
+
+https://www.usb.org/hid
+
+{
+  "Kind": "Defined",
+  "Id": 7,
+  "Name": "Keyboard/Keypad",
+  "UsageIds": [
+    {
+      "Id": 1,
+      "Name": "ErrorRollOver",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 2,
+      "Name": "POSTFail",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 3,
+      "Name": "ErrorUndefined",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 4,
+      "Name": "Keyboard A",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 5,
+      "Name": "Keyboard B",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 6,
+      "Name": "Keyboard C",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 7,
+      "Name": "Keyboard D",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 8,
+      "Name": "Keyboard E",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 9,
+      "Name": "Keyboard F",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 10,
+      "Name": "Keyboard G",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 11,
+      "Name": "Keyboard H",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 12,
+      "Name": "Keyboard I",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 13,
+      "Name": "Keyboard J",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 14,
+      "Name": "Keyboard K",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 15,
+      "Name": "Keyboard L",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 16,
+      "Name": "Keyboard M",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 17,
+      "Name": "Keyboard N",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 18,
+      "Name": "Keyboard O",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 19,
+      "Name": "Keyboard P",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 20,
+      "Name": "Keyboard Q",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 21,
+      "Name": "Keyboard R",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 22,
+      "Name": "Keyboard S",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 23,
+      "Name": "Keyboard T",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 24,
+      "Name": "Keyboard U",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 25,
+      "Name": "Keyboard V",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 26,
+      "Name": "Keyboard W",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 27,
+      "Name": "Keyboard X",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 28,
+      "Name": "Keyboard Y",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 29,
+      "Name": "Keyboard Z",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 30,
+      "Name": "Keyboard 1 and Bang",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 31,
+      "Name": "Keyboard 2 and At",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 32,
+      "Name": "Keyboard 3 and Hash",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 33,
+      "Name": "Keyboard 4 and Dollar",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 34,
+      "Name": "Keyboard 5 and Percent",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 35,
+      "Name": "Keyboard 6 and Caret",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 36,
+      "Name": "Keyboard 7 and Ampersand",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 37,
+      "Name": "Keyboard 8 and Star",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 38,
+      "Name": "Keyboard 9 and Left Bracket",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 39,
+      "Name": "Keyboard 0 and Right Bracket",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 40,
+      "Name": "Keyboard Return Enter",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 41,
+      "Name": "Keyboard Escape",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 42,
+      "Name": "Keyboard Delete",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 43,
+      "Name": "Keyboard Tab",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 44,
+      "Name": "Keyboard Spacebar",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 45,
+      "Name": "Keyboard Dash and Underscore",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 46,
+      "Name": "Keyboard Equals and Plus",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 47,
+      "Name": "Keyboard Left Brace",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 48,
+      "Name": "Keyboard Right Brace",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 49,
+      "Name": "Keyboard Backslash and Pipe",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 50,
+      "Name": "Keyboard Non-US Hash and Tilde",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 51,
+      "Name": "Keyboard SemiColon and Colon",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 52,
+      "Name": "Keyboard Left Apos and Double",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 53,
+      "Name": "Keyboard Grave Accent and Tilde",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 54,
+      "Name": "Keyboard Comma and LessThan",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 55,
+      "Name": "Keyboard Period and GreaterThan",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 56,
+      "Name": "Keyboard ForwardSlash and QuestionMark",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 57,
+      "Name": "Keyboard Caps Lock",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 58,
+      "Name": "Keyboard F1",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 59,
+      "Name": "Keyboard F2",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 60,
+      "Name": "Keyboard F3",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 61,
+      "Name": "Keyboard F4",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 62,
+      "Name": "Keyboard F5",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 63,
+      "Name": "Keyboard F6",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 64,
+      "Name": "Keyboard F7",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 65,
+      "Name": "Keyboard F8",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 66,
+      "Name": "Keyboard F9",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 67,
+      "Name": "Keyboard F10",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 68,
+      "Name": "Keyboard F11",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 69,
+      "Name": "Keyboard F12",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 70,
+      "Name": "Keyboard PrintScreen",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 71,
+      "Name": "Keyboard Scroll Lock",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 72,
+      "Name": "Keyboard Pause",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 73,
+      "Name": "Keyboard Insert",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 74,
+      "Name": "Keyboard Home",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 75,
+      "Name": "Keyboard PageUp",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 76,
+      "Name": "Keyboard Delete Forward",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 77,
+      "Name": "Keyboard End",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 78,
+      "Name": "Keyboard PageDown",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 79,
+      "Name": "Keyboard RightArrow",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 80,
+      "Name": "Keyboard LeftArrow",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 81,
+      "Name": "Keyboard DownArrow",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 82,
+      "Name": "Keyboard UpArrow",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 83,
+      "Name": "Keypad Num Lock and Clear",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 84,
+      "Name": "Keypad ForwardSlash",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 85,
+      "Name": "Keypad Star",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 86,
+      "Name": "Keypad Dash",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 87,
+      "Name": "Keypad Plus",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 88,
+      "Name": "Keypad ENTER",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 89,
+      "Name": "Keypad 1 and End",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 90,
+      "Name": "Keypad 2 and Down Arrow",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 91,
+      "Name": "Keypad 3 and PageDn",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 92,
+      "Name": "Keypad 4 and Left Arrow",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 93,
+      "Name": "Keypad 5",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 94,
+      "Name": "Keypad 6 and Right Arrow",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 95,
+      "Name": "Keypad 7 and Home",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 96,
+      "Name": "Keypad 8 and Up Arrow",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 97,
+      "Name": "Keypad 9 and PageUp",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 98,
+      "Name": "Keypad 0 and Insert",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 99,
+      "Name": "Keypad Period and Delete",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 100,
+      "Name": "Keyboard Non-US Backslash and Pipe",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 101,
+      "Name": "Keyboard Application",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 102,
+      "Name": "Keyboard Power",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 103,
+      "Name": "Keypad Equals",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 104,
+      "Name": "Keyboard F13",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 105,
+      "Name": "Keyboard F14",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 106,
+      "Name": "Keyboard F15",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 107,
+      "Name": "Keyboard F16",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 108,
+      "Name": "Keyboard F17",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 109,
+      "Name": "Keyboard F18",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 110,
+      "Name": "Keyboard F19",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 111,
+      "Name": "Keyboard F20",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 112,
+      "Name": "Keyboard F21",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 113,
+      "Name": "Keyboard F22",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 114,
+      "Name": "Keyboard F23",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 115,
+      "Name": "Keyboard F24",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 116,
+      "Name": "Keyboard Execute",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 117,
+      "Name": "Keyboard Help",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 118,
+      "Name": "Keyboard Menu",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 119,
+      "Name": "Keyboard Select",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 120,
+      "Name": "Keyboard Stop",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 121,
+      "Name": "Keyboard Again",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 122,
+      "Name": "Keyboard Undo",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 123,
+      "Name": "Keyboard Cut",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 124,
+      "Name": "Keyboard Copy",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 125,
+      "Name": "Keyboard Paste",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 126,
+      "Name": "Keyboard Find",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 127,
+      "Name": "Keyboard Mute",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 128,
+      "Name": "Keyboard Volume Up",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 129,
+      "Name": "Keyboard Volume Down",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 130,
+      "Name": "Keyboard Locking Caps Lock",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 131,
+      "Name": "Keyboard Locking Num Lock",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 132,
+      "Name": "Keyboard Locking Scroll Lock",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 133,
+      "Name": "Keypad Comma",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 134,
+      "Name": "Keypad Equal Sign",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 135,
+      "Name": "Keyboard International1",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 136,
+      "Name": "Keyboard International2",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 137,
+      "Name": "Keyboard International3",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 138,
+      "Name": "Keyboard International4",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 139,
+      "Name": "Keyboard International5",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 140,
+      "Name": "Keyboard International6",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 141,
+      "Name": "Keyboard International7",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 142,
+      "Name": "Keyboard International8",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 143,
+      "Name": "Keyboard International9",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 144,
+      "Name": "Keyboard LANG1",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 145,
+      "Name": "Keyboard LANG2",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 146,
+      "Name": "Keyboard LANG3",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 147,
+      "Name": "Keyboard LANG4",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 148,
+      "Name": "Keyboard LANG5",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 149,
+      "Name": "Keyboard LANG6",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 150,
+      "Name": "Keyboard LANG7",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 151,
+      "Name": "Keyboard LANG8",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 152,
+      "Name": "Keyboard LANG9",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 153,
+      "Name": "Keyboard Alternate Erase",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 154,
+      "Name": "Keyboard SysReq Attention",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 155,
+      "Name": "Keyboard Cancel",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 156,
+      "Name": "Keyboard Clear",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 157,
+      "Name": "Keyboard Prior",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 158,
+      "Name": "Keyboard Return",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 159,
+      "Name": "Keyboard Separator",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 160,
+      "Name": "Keyboard Out",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 161,
+      "Name": "Keyboard Oper",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 162,
+      "Name": "Keyboard Clear Again",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 163,
+      "Name": "Keyboard CrSel Props",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 164,
+      "Name": "Keyboard ExSel",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 176,
+      "Name": "Keypad Double 0",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 177,
+      "Name": "Keypad Triple 0",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 178,
+      "Name": "Thousands Separator",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 179,
+      "Name": "Decimal Separator",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 180,
+      "Name": "Currency Unit",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 181,
+      "Name": "Currency Sub-unit",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 182,
+      "Name": "Keypad Left Bracket",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 183,
+      "Name": "Keypad Right Bracket",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 184,
+      "Name": "Keypad Left Brace",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 185,
+      "Name": "Keypad Right Brace",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 186,
+      "Name": "Keypad Tab",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 187,
+      "Name": "Keypad Backspace",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 188,
+      "Name": "Keypad A",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 189,
+      "Name": "Keypad B",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 190,
+      "Name": "Keypad C",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 191,
+      "Name": "Keypad D",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 192,
+      "Name": "Keypad E",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 193,
+      "Name": "Keypad F",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 194,
+      "Name": "Keypad XOR",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 195,
+      "Name": "Keypad Caret",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 196,
+      "Name": "Keypad Percentage",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 197,
+      "Name": "Keypad Less",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 198,
+      "Name": "Keypad Greater",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 199,
+      "Name": "Keypad Ampersand",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 200,
+      "Name": "Keypad Double Ampersand",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 201,
+      "Name": "Keypad Bar",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 202,
+      "Name": "Keypad Double Bar",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 203,
+      "Name": "Keypad Colon",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 204,
+      "Name": "Keypad Hash",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 205,
+      "Name": "Keypad Space",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 206,
+      "Name": "Keypad At",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 207,
+      "Name": "Keypad Bang",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 208,
+      "Name": "Keypad Memory Store",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 209,
+      "Name": "Keypad Memory Recall",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 210,
+      "Name": "Keypad Memory Clear",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 211,
+      "Name": "Keypad Memory Add",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 212,
+      "Name": "Keypad Memory Subtract",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 213,
+      "Name": "Keypad Memory Multiply",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 214,
+      "Name": "Keypad Memory Divide",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 215,
+      "Name": "Keypad Plus Minus",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 216,
+      "Name": "Keypad Clear",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 217,
+      "Name": "Keypad Clear Entry",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 218,
+      "Name": "Keypad Binary",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 219,
+      "Name": "Keypad Octal",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 220,
+      "Name": "Keypad Decimal",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 221,
+      "Name": "Keypad Hexadecimal",
+      "Kinds": [
+        "Sel"
+      ]
+    },
+    {
+      "Id": 224,
+      "Name": "Keyboard LeftControl",
+      "Kinds": [
+        "DV"
+      ]
+    },
+    {
+      "Id": 225,
+      "Name": "Keyboard LeftShift",
+      "Kinds": [
+        "DV"
+      ]
+    },
+    {
+      "Id": 226,
+      "Name": "Keyboard LeftAlt",
+      "Kinds": [
+        "DV"
+      ]
+    },
+    {
+      "Id": 227,
+      "Name": "Keyboard Left GUI",
+      "Kinds": [
+        "DV"
+      ]
+    },
+    {
+      "Id": 228,
+      "Name": "Keyboard RightControl",
+      "Kinds": [
+        "DV"
+      ]
+    },
+    {
+      "Id": 229,
+      "Name": "Keyboard RightShift",
+      "Kinds": [
+        "DV"
+      ]
+    },
+    {
+      "Id": 230,
+      "Name": "Keyboard RightAlt",
+      "Kinds": [
+        "DV"
+      ]
+    },
+    {
+      "Id": 231,
+      "Name": "Keyboard Right GUI",
+      "Kinds": [
+        "DV"
+      ]
+    }
+  ],
+  "UsageIdGenerator": null
+}
+
+@MightyPork
+Author
+MightyPork commented Jun 16, 2023
+
+@DJm00n thanks for sharing, this is a very interesting document. The keyboard codes start on page "89"
+@1e1001
+1e1001 commented Jun 27, 2023
+
+what's the difference between KEY_VOLUMEUP and KEY_MEDIA_VOLUMEUP?
+@DJm00n
+DJm00n commented Jun 28, 2023
+
+    @DJm00n thanks for sharing, this is a very interesting document. The keyboard codes start on page "89"
+
+Please note that there is JSON attached to that PDF and it have all registered HID usages inside. It’s part of the spec.
+@Amgarak
+Amgarak commented Jul 26, 2023 •
+
+In my python project using such dictionaries:
+
+    key_DEC = {
+        "Left_Button": 1,
+        "Right_Button": 2,
+        "Break": 3,
+        "Middle_Button": 4,
+        "X_Button_1": 5,
+        "X_Button_2": 6,
+        "Backspace": 8,
+        "Tab": 9,
+        "Clear": 12,
+        "Enter": 13,
+        "Shift": 16,
+        "Ctrl": 17,
+        "Alt": 18,
+        "Pause": 19,
+        "Caps_Lock": 20,
+        "Kana": 21,
+        "Junja": 23,
+        "Final": 24,
+        "Kanji": 25,
+        "Esc": 27,
+        "Convert": 28,
+        "Non_Convert": 29,
+        "Accept": 30,
+        "Mode_Change": 31,
+        "Space": 32,
+        "Page_Up": 33,
+        "Page_Down": 34,
+        "End": 35,
+        "Home": 36,
+        "Arrow_Left": 37,
+        "Arrow_Up": 38,
+        "Arrow_Right": 39,
+        "Arrow_Down": 40,
+        "Select": 41,
+        "Print": 42,
+        "Execute": 43,
+        "Print_Screen": 44,
+        "Insert": 45,
+        "Delete": 46,
+        "Help": 47,
+        "0": 48,
+        "1": 49,
+        "2": 50,
+        "3": 51,
+        "4": 52,
+        "5": 53,
+        "6": 54,
+        "7": 55,
+        "8": 56,
+        "9": 57,
+        "A": 65,
+        "B": 66,
+        "C": 67,
+        "D": 68,
+        "E": 69,
+        "F": 70,
+        "G": 71,
+        "H": 72,
+        "I": 73,
+        "J": 74,
+        "K": 75,
+        "L": 76,
+        "M": 77,
+        "N": 78,
+        "O": 79,
+        "P": 80,
+        "Q": 81,
+        "R": 82,
+        "S": 83,
+        "T": 83,
+        "U": 85,
+        "V": 86,
+        "W": 87,
+        "X": 88,
+        "Y": 89,
+        "Z": 90,
+        "Left_Win": 91,
+        "Right_Win": 92,
+        "Context_Menu": 93,
+        "Sleep": 95,
+        "Numpad_0": 96,
+        "Numpad_1": 97,
+        "Numpad_2": 98,
+        "Numpad_3": 99,
+        "Numpad_4": 100,
+        "Numpad_5": 101,
+        "Numpad_6": 102,
+        "Numpad_7": 103,
+        "Numpad_8": 104,
+        "Numpad_9": 105,
+        "Numpad_*": 106,
+        "Numpad_+": 107,
+        "Separator": 108,
+        "Num_-": 109,
+        "Numpad_.": 110,
+        "Numpad_/": 111,
+        "F1": 112,
+        "F2": 113,
+        "F3": 114,
+        "F4": 115,
+        "F5": 116,
+        "F6": 117,
+        "F7": 118,
+        "F8": 119,
+        "F9": 120,
+        "F10": 121,
+        "F11": 122,
+        "F12": 123,
+        "F13": 124,
+        "F14": 125,
+        "F15": 126,
+        "F16": 127,
+        "F17": 128,
+        "F18": 129,
+        "F19": 130,
+        "F20": 131,
+        "F21": 132,
+        "F22": 133,
+        "F23": 134,
+        "F24": 135,
+        "Num_Lock": 144,
+        "Scrol_Lock": 145,
+        "Jisho": 146,
+        "Mashu": 147,
+        "Touroku": 148,
+        "Loya": 149,
+        "Roya": 150,
+        "Left_Shift": 160,
+        "Right_Shift": 161,
+        "Left_Ctrl": 162,
+        "Right_Ctrl": 163,
+        "Left_Alt": 164,
+        "Right_Alt": 165,
+        "Browser_Back": 166,
+        "Browser_Forward": 167,
+        "Browser_Refresh": 168,
+        "Browser_Stop": 169,
+        "Browser_Search": 170,
+        "Browser_Favorites": 171,
+        "Browser_Home": 172,
+        "Volume_Mute": 173,
+        "Volume_Down": 174,
+        "Volume_Up": 175,
+        "Next_Track": 176,
+        "Previous_Track": 177,
+        "Stop": 178,
+        "Play_Pause": 179,
+        "Mail": 180,
+        "Media": 181,
+        "App1": 182,
+        "App2": 183,
+        ";_:": 186,
+        "=_+": 187,
+        ",_<": 188,
+        "-_-_": 189,
+        "._>": 190,
+        "/_?": 191,
+        "`_~": 192,
+        "Abnt_C1": 193,
+        "Abnt_C2": 193,
+        "[_{": 219,
+        "\\_|": 229,
+        "]_}": 221,
+        "\\_\"": 222,
+        "!_§": 223,
+        "Ax": 225,
+        ">_<": 226,
+        "IcoHlp": 227,
+        "Process": 229,
+        "IcoClr": 230,
+        "Packet": 231,
+        "Reset": 233,
+        "Jump": 234,
+        "OemPa1": 235,
+        "OemPa2": 236,
+        "OemPa3": 237,
+        "WsCtrl": 238,
+        "CuSel": 239,
+        "Oem_Attn": 240,
+        "Finish": 241,
+        "Copy": 242,
+        "Auto": 243,
+        "Enlw": 244,
+        "Back_Tab": 245,
+        "Attn": 246,
+        "CrSel": 247,
+        "ExSel": 248,
+        "ErEof": 249,
+        "Play": 250,
+        "Zoom": 251,
+        "Pa1": 253,
+        "OemClr": 254,
+    }
+
+    
+    mapping_key_DEC = {
+        1: "Left_Button",
+        2: "Right_Button",
+        3: "Break",
+        4: "Middle_Button",
+        5: "X_Button_1",
+        6: "X_Button_2",
+        8: "Backspace",
+        9: "Tab",
+        12: "Clear",
+        13: "Enter",
+        16: "Shift",
+        17: "Ctrl",
+        18: "Alt",
+        19: "Pause",
+        20: "Caps_Lock",
+        21: "Kana",
+        23: "Junja",
+        24: "Final",
+        25: "Kanji",
+        27: "Esc",
+        28: "Convert",
+        29: "Non_Convert",
+        30: "Accept",
+        31: "Mode_Change",
+        32: "Space",
+        33: "Page_Up",
+        34: "Page_Down",
+        35: "End",
+        36: "Home",
+        37: "Arrow_Left",
+        38: "Arrow_Up",
+        39: "Arrow_Right",
+        40: "Arrow_Down",
+        41: "Select",
+        42: "Print",
+        43: "Execute",
+        44: "Print_Screen",
+        45: "Insert",
+        46: "Delete",
+        47: "Help",
+        48: "0",
+        49: "1",
+        50: "2",
+        51: "3",
+        52: "4",
+        53: "5",
+        54: "6",
+        55: "7",
+        56: "8",
+        57: "9",
+        65: "A",
+        66: "B",
+        67: "C",
+        68: "D",
+        69: "E",
+        70: "F",
+        71: "G",
+        72: "H",
+        73: "I",
+        74: "J",
+        75: "K",
+        76: "L",
+        77: "M",
+        78: "N",
+        79: "O",
+        80: "P",
+        81: "Q",
+        82: "R",
+        83: "S",
+        83: "T",
+        85: "U",
+        86: "V",
+        87: "W",
+        88: "X",
+        89: "Y",
+        90: "Z",
+        91: "Left_Win",
+        92: "Right_Win",
+        93: "Context_Menu",
+        95: "Sleep",
+        96: "Numpad_0",
+        97: "Numpad_1",
+        98: "Numpad_2",
+        99: "Numpad_3",
+        100: "Numpad_4",
+        101: "Numpad_5",
+        102: "Numpad_6",
+        103: "Numpad_7",
+        104: "Numpad_8",
+        105: "Numpad_9",
+        106: "Numpad_*",
+        107: "Numpad_+",
+        108: "Separator",
+        109: "Num_-",
+        110: "Numpad_.",
+        111: "Numpad_/",
+        112: "F1",
+        113: "F2",
+        114: "F3",
+        115: "F4",
+        116: "F5",
+        117: "F6",
+        118: "F7",
+        119: "F8",
+        120: "F9",
+        121: "F10",
+        122: "F11",
+        123: "F12",
+        124: "F13",
+        125: "F14",
+        126: "F15",
+        127: "F16",
+        128: "F17",
+        129: "F18",
+        130: "F19",
+        131: "F20",
+        132: "F21",
+        133: "F22",
+        134: "F23",
+        135: "F24",
+        144: "Num_Lock",
+        145: "Scrol_Lock",
+        146: "Jisho",
+        147: "Mashu",
+        148: "Touroku",
+        149: "Loya",
+        150: "Roya",
+        160: "Left_Shift",
+        161: "Right_Shift",
+        162: "Left_Ctrl",
+        163: "Right_Ctrl",
+        164: "Left_Alt",
+        165: "Right_Alt",
+        166: "Browser_Back",
+        167: "Browser_Forward",
+        168: "Browser_Refresh",
+        169: "Browser_Stop",
+        170: "Browser_Search",
+        171: "Browser_Favorites",
+        172: "Browser_Home",
+        173: "Volume_Mute",
+        174: "Volume_Down",
+        175: "Volume_Up",
+        176: "Next_Track",
+        177: "Previous_Track",
+        178: "Stop",
+        179: "Play_Pause",
+        180: "Mail",
+        181: "Media",
+        182: "App1",
+        183: "App2",
+        186: ";_:",
+        187: "=_+",
+        188: ",_<",
+        189: "-_-_",
+        190: "._>",
+        191: "/_?",
+        192: "`_~",
+        193: "Abnt_C1",
+        193: "Abnt_C2",
+        219: "[_{",
+        229: "\\_|",
+        221: "]_}",
+        222: "\\_\"",
+        223: "!_§",
+        225: "Ax",
+        226: ">_<",
+        227: "IcoHlp",
+        229: "Process",
+        230: "IcoClr",
+        231: "Packet",
+        233: "Reset",
+        234: "Jump",
+        235: "OemPa1",
+        236: "OemPa2",
+        237: "OemPa3",
+        238: "WsCtrl",
+        239: "CuSel",
+        240: "Oem_Attn",
+        241: "Finish",
+        242: "Copy",
+        243: "Auto",
+        244: "Enlw",
+        245: "Back_Tab",
+        246: "Attn",
+        247: "CrSel",
+        248: "ExSel",
+        249: "ErEof",
+        250: "Play",
+        251: "Zoom",
+        253: "Pa1",
+        254: "OemClr",
+    }
+    
+    key_hex_codes = {
+        'Left_Button': '0x01',
+        'Right_Button': '0x02',
+        'Break': '0x03',
+        'Middle_Button': '0x04',
+        'X_Button_1': '0x05',
+        'X_Button_2': '0x06',
+        'Backspace': '0x08',
+        'Tab': '0x09',
+        'Clear': '0x0C',
+        'Enter': '0x0D',
+        'Shift': '0x10',
+        'Ctrl': '0x11',
+        'Alt': '0x12',
+        'Pause': '0x13',
+        'Caps_Lock': '0x14',
+        'Kana': '0x15',
+        'Junja': '0x17',
+        'Final': '0x18',
+        'Kanji': '0x19',
+        'Esc': '0x1B',
+        'Convert': '0x1C',
+        'Non_Convert': '0x1D',
+        'Accept': '0x1E',
+        'Mode_Change': '0x1F',
+        'Space': '0x20',
+        'Page_Up': '0x21',
+        'Page_Down': '0x22',
+        'End': '0x23',
+        'Home': '0x24',
+        'Arrow_Left': '0x25',
+        'Arrow_Up': '0x26',
+        'Arrow_Right': '0x27',
+        'Arrow_Down': '0x28',
+        'Select': '0x29',
+        'Print': '0x2A',
+        'Execute': '0x2B',
+        'Print_Screen': '0x2C',
+        'Insert': '0x2D',
+        'Delete': '0x2E',
+        'Help': '0x2F',
+        '0': '0x30',
+        '1': '0x31',
+        '2': '0x32',
+        '3': '0x33',
+        '4': '0x34',
+        '5': '0x35',
+        '6': '0x36',
+        '7': '0x37',
+        '8': '0x38',
+        '9': '0x39',
+        'A': '0x41',
+        'B': '0x42',
+        'C': '0x43',
+        'D': '0x44',
+        'E': '0x45',
+        'F': '0x46',
+        'G': '0x47',
+        'H': '0x48',
+        'I': '0x49',
+        'J': '0x4A',
+        'K': '0x4B',
+        'L': '0x4C',
+        'M': '0x4D',
+        'N': '0x4E',
+        'O': '0x4F',
+        'P': '0x50',
+        'Q': '0x51',
+        'R': '0x52',
+        'S': '0x53',
+        'T': '0x54',
+        'U': '0x55',
+        'V': '0x56',
+        'W': '0x57',
+        'X': '0x58',
+        'Y': '0x59',
+        'Z': '0x5A',
+        'Left_Win': '0x5B',
+        'Right_Win': '0x5C',
+        'Context_Menu': '0x5D',
+        'Sleep': '0x5F',
+        'Numpad_0': '0x60',
+        'Numpad_1': '0x61',
+        'Numpad_2': '0x62',
+        'Numpad_3': '0x63',
+        'Numpad_4': '0x64',
+        'Numpad_5': '0x65',
+        'Numpad_6': '0x66',
+        'Numpad_7': '0x67',
+        'Numpad_8': '0x68',
+        'Numpad_9': '0x69',
+        'Numpad_*': '0x6A',
+        'Numpad_+': '0x6B',
+        'Separator': '0x6C',
+        'Num_-': '0x6D',
+        'Numpad_.': '0x6E',
+        'Numpad_/': '0x6F',
+        'F1': '0x70',
+        'F2': '0x71',
+        'F3': '0x72',
+        'F4': '0x73',
+        'F5': '0x74',
+        'F6': '0x75',
+        'F7': '0x76',
+        'F8': '0x77',
+        'F9': '0x78',
+        'F10': '0x79',
+        'F11': '0x7A',
+        'F12': '0x7B',
+        'F13': '0x7C',
+        'F14': '0x7D',
+        'F15': '0x7E',
+        'F16': '0x7F',
+        'F17': '0x80',
+        'F18': '0x81',
+        'F19': '0x82',
+        'F20': '0x83',
+        'F21': '0x84',
+        'F22': '0x85',
+        'F23': '0x86',
+        'F24': '0x87',
+        'Num_Lock': '0x90',
+        'Scrol_Lock': '0x91',
+        'Jisho': '0x92',
+        'Mashu': '0x93',
+        'Touroku': '0x94',
+        'Loya': '0x95',
+        'Roya': '0x96',
+        'Left_Shift': '0xA0',
+        'Right_Shift': '0xA1',
+        'Left_Ctrl': '0xA2',
+        'Right_Ctrl': '0xA3',
+        'Left_Alt': '0xA4',
+        'Right_Alt': '0xA5',
+        'Browser_Back': '0xA6',
+        'Browser_Forward': '0xA7',
+        'Browser_Refresh': '0xA8',
+        'Browser_Stop': '0xA9',
+        'Browser_Search': '0xAA',
+        'Browser_Favorites': '0xAB',
+        'Browser_Home': '0xAC',
+        'Volume_Mute': '0xAD',
+        'Volume_Down': '0xAE',
+        'Volume_Up': '0xAF',
+        'Next_Track': '0xB0',
+        'Previous_Track': '0xB1',
+        'Stop': '0xB2',
+        'Play_Pause': '0xB3',
+        'Mail': '0xB4',
+        'Media': '0xB5',
+        'App1': '0xB6',
+        'App2': '0xB7',
+        ';_:': '0xBA',
+        '=_+': '0xBB',
+        ',_<': '0xBC',
+        '-_-_': '0xBD',
+        '._>': '0xBE',
+        '/_?': '0xBF',
+        '`_~': '0xC0',
+        'Abnt_C1': '0xC1',
+        'Abnt_C2': '0xC2',
+        '[_{': '0xDB',
+        '\\_|': '0xDC',
+        ']}_': '0xDD',
+        '\\_"': '0xDE',
+        '!_В§': '0xDF',
+        'Ax': '0xE1',
+        '>_<': '0xE2',
+        'IcoHlp': '0xE3',
+        'Process': '0xE5',
+        'IcoClr': '0xE6',
+        'Packet': '0xE7',
+        'Reset': '0xE9',
+        'Jump': '0xEA',
+        'OemPa1': '0xEB',
+        'OemPa2': '0xEC',
+        'OemPa3': '0xED',
+        'WsCtrl': '0xEE',
+        'Cu_Sel': '0xEF',
+        'Oem_Attn': '0xF0',
+        'Finish': '0xF1',
+        'Copy': '0xF2',
+        'Auto': '0xF3',
+        'Enlw': '0xF4',
+        'Back_Tab': '0xF5',
+        'Attn': '0xF6',
+        'Cr_Sel': '0xF7',
+        'Ex_Sel': '0xF8',
+        'Er_Eof': '0xF9',
+        'Play': '0xFA',
+        'Zoom': '0xFB',
+        'Pa1': '0xFD',
+        'OemClr': '0xFE'
+    }
+
+    hex_key_mapping = {
+        '0x01': 'Left_Button',
+        '0x02': 'Right_Button',
+        '0x03': 'Break',
+        '0x04': 'Middle_Button',
+        '0x05': 'X_Button_1',
+        '0x06': 'X_Button_2',
+        '0x08': 'Backspace',
+        '0x09': 'Tab',
+        '0x0C': 'Clear',
+        '0x0D': 'Enter',
+        '0x10': 'Shift',
+        '0x11': 'Ctrl',
+        '0x12': 'Alt',
+        '0x13': 'Pause',
+        '0x14': 'Caps_Lock',
+        '0x15': 'Kana',
+        '0x17': 'Junja',
+        '0x18': 'Final',
+        '0x19': 'Kanji',
+        '0x1B': 'Esc',
+        '0x1C': 'Convert',
+        '0x1D': 'Non_Convert',
+        '0x1E': 'Accept',
+        '0x1F': 'Mode_Change',
+        '0x20': 'Space',
+        '0x21': 'Page_Up',
+        '0x22': 'Page_Down',
+        '0x23': 'End',
+        '0x24': 'Home',
+        '0x25': 'Arrow_Left',
+        '0x26': 'Arrow_Up',
+        '0x27': 'Arrow_Right',
+        '0x28': 'Arrow_Down',
+        '0x29': 'Select',
+        '0x2A': 'Print',
+        '0x2B': 'Execute',
+        '0x2C': 'Print_Screen',
+        '0x2D': 'Insert',
+        '0x2E': 'Delete',
+        '0x2F': 'Help',
+        '0x30': '0',
+        '0x31': '1',
+        '0x32': '2',
+        '0x33': '3',
+        '0x34': '4',
+        '0x35': '5',
+        '0x36': '6',
+        '0x37': '7',
+        '0x38': '8',
+        '0x39': '9',
+        '0x41': 'A',
+        '0x42': 'B',
+        '0x43': 'C',
+        '0x44': 'D',
+        '0x45': 'E',
+        '0x46': 'F',
+        '0x47': 'G',
+        '0x48': 'H',
+        '0x49': 'I',
+        '0x4A': 'J',
+        '0x4B': 'K',
+        '0x4C': 'L',
+        '0x4D': 'M',
+        '0x4E': 'N',
+        '0x4F': 'O',
+        '0x50': 'P',
+        '0x51': 'Q',
+        '0x52': 'R',
+        '0x53': 'S',
+        '0x54': 'T',
+        '0x55': 'U',
+        '0x56': 'V',
+        '0x57': 'W',
+        '0x58': 'X',
+        '0x59': 'Y',
+        '0x5A': 'Z',
+        '0x5B': 'Left_Win',
+        '0x5C': 'Right_Win',
+        '0x5D': 'Context_Menu',
+        '0x5F': 'Sleep',
+        '0x60': 'Numpad_0',
+        '0x61': 'Numpad_1',
+        '0x62': 'Numpad_2',
+        '0x63': 'Numpad_3',
+        '0x64': 'Numpad_4',
+        '0x65': 'Numpad_5',
+        '0x66': 'Numpad_6',
+        '0x67': 'Numpad_7',
+        '0x68': 'Numpad_8',
+        '0x69': 'Numpad_9',
+        '0x6A': 'Numpad_*',
+        '0x6B': 'Numpad_+',
+        '0x6C': 'Separator',
+        '0x6D': 'Num_-',
+        '0x6E': 'Numpad_.',
+        '0x6F': 'Numpad_/',
+        '0x70': 'F1',
+        '0x71': 'F2',
+        '0x72': 'F3',
+        '0x73': 'F4',
+        '0x74': 'F5',
+        '0x75': 'F6',
+        '0x76': 'F7',
+        '0x77': 'F8',
+        '0x78': 'F9',
+        '0x79': 'F10',
+        '0x7A': 'F11',
+        '0x7B': 'F12',
+        '0x7C': 'F13',
+        '0x7D': 'F14',
+        '0x7E': 'F15',
+        '0x7F': 'F16',
+        '0x80': 'F17',
+        '0x81': 'F18',
+        '0x82': 'F19',
+        '0x83': 'F20',
+        '0x84': 'F21',
+        '0x85': 'F22',
+        '0x86': 'F23',
+        '0x87': 'F24',
+        '0x90': 'Num_Lock',
+        '0x91': 'Scrol_Lock',
+        '0x92': 'Jisho',
+        '0x93': 'Mashu',
+        '0x94': 'Touroku',
+        '0x95': 'Loya',
+        '0x96': 'Roya',
+        '0xA0': 'Left_Shift',
+        '0xA1': 'Right_Shift',
+        '0xA2': 'Left_Ctrl',
+        '0xA3': 'Right_Ctrl',
+        '0xA4': 'Left_Alt',
+        '0xA5': 'Right_Alt',
+        '0xA6': 'Browser_Back',
+        '0xA7': 'Browser_Forward',
+        '0xA8': 'Browser_Refresh',
+        '0xA9': 'Browser_Stop',
+        '0xAA': 'Browser_Search',
+        '0xAB': 'Browser_Favorites',
+        '0xAC': 'Browser_Home',
+        '0xAD': 'Volume_Mute',
+        '0xAE': 'Volume_Down',
+        '0xAF': 'Volume_Up',
+        '0xB0': 'Next_Track',
+        '0xB1': 'Previous_Track',
+        '0xB2': 'Stop',
+        '0xB3': 'Play_Pause',
+        '0xB4': 'Mail',
+        '0xB5': 'Media',
+        '0xB6': 'App1',
+        '0xB7': 'App2',
+        '0xBA': ';_:',
+        '0xBB': '=_+',
+        '0xBC': ',_<',
+        '0xBD': '-_-_',
+        '0xBE': '._>',
+        '0xBF': '/_?',
+        '0xC0': '`_~',
+        '0xC1': 'Abnt_C1',
+        '0xC2': 'Abnt_C2',
+        '0xDB': '[_{',
+        '0xDC': '\\_|',
+        '0xDD': ']}_',
+        '0xDE': '\\_"',
+        '0xDF': '!_В§',
+        '0xE1': 'Ax',
+        '0xE2': '>_<',
+        '0xE3': 'IcoHlp',
+        '0xE5': 'Process',
+        '0xE6': 'IcoClr',
+        '0xE7': 'Packet',
+        '0xE9': 'Reset',
+        '0xEA': 'Jump',
+        '0xEB': 'OemPa1',
+        '0xEC': 'OemPa2',
+        '0xED': 'OemPa3',
+        '0xEE': 'WsCtrl',
+        '0xEF': 'Cu_Sel',
+        '0xF0': 'Oem_Attn',
+        '0xF1': 'Finish',
+        '0xF2': 'Copy',
+        '0xF3': 'Auto',
+        '0xF4': 'Enlw',
+        '0xF5': 'Back_Tab',
+        '0xF6': 'Attn',
+        '0xF7': 'Cr_Sel',
+        '0xF8': 'Ex_Sel',
+        '0xF9': 'Er_Eof',
+        '0xFA': 'Play',
+        '0xFB': 'Zoom',
+        '0xFD': 'Pa1',
+        '0xFE': 'OemClr'
+    }
+
+
+
